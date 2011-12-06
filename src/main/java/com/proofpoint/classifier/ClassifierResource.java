@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 public class ClassifierResource
 {
     private final Pattern CREDIT_CARD_PATTERN = Pattern.compile("(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})");
+    private final Pattern SSN_PATTERN = Pattern.compile("\\d{3}-\\d{2}-\\d{4}");
 
     @POST
     @Consumes(MediaType.APPLICATION_OCTET_STREAM)
@@ -42,6 +43,10 @@ public class ClassifierResource
 
         if (CREDIT_CARD_PATTERN.matcher(text.replaceAll("[ -]+", "")).find()) {
             builder.put("CreditCard", 100);
+        }
+
+        if (SSN_PATTERN.matcher(text).find()) {
+            builder.put("SSN", 100);
         }
 
         return builder.build();
