@@ -17,6 +17,7 @@ package com.proofpoint.classifier;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
+import com.google.inject.Scopes;
 import com.proofpoint.discovery.client.DiscoveryBinder;
 
 public class MainModule
@@ -27,6 +28,8 @@ public class MainModule
         binder.requireExplicitBindings();
         binder.disableCircularProxies();
 
-        DiscoveryBinder.discoveryBinder(binder).bindHttpAnnouncement("skeleton");
+        DiscoveryBinder.discoveryBinder(binder).bindHttpAnnouncement("classifier");
+
+        binder.bind(ClassifierResource.class).in(Scopes.SINGLETON);
     }
 }
