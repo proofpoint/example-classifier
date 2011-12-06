@@ -17,7 +17,18 @@
         <main-class>com.proofpoint.classifier.Main</main-class>
     </properties>
 
-    
+    <distributionManagement>
+          <snapshotRepository>
+              <id>proofpoint-snapshots</id>
+              <name>Proofpoint Snapshots Repository</name>
+              <url>http://ec2-50-19-231-157.compute-1.amazonaws.com:8000/nexus/content/repositories/proofpoint-eng-snapshots</url>
+          </snapshotRepository>
+          <repository>
+              <id>proofpoint-releases</id>
+              <name>Proofpoint Releases Repository</name>
+              <url>http://ec2-50-19-231-157.compute-1.amazonaws.com:8000/nexus/content/repositories/proofpoint-eng</url>
+          </repository>
+      </distributionManagement>
 
     <dependencies>
         <dependency>
