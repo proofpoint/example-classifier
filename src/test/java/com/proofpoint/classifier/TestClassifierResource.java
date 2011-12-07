@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class TestClassifierResource
 {
@@ -56,6 +57,20 @@ public class TestClassifierResource
 
         Map<String, Number> expected = ImmutableMap.<String, Number>builder()
                 .put("CreditCard", 100)
+                .build();
+
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testSupportsWordDoc()
+            throws IOException
+    {
+        Map<String, Number> actual = new ClassifierResource().post(Resources.newInputStreamSupplier(Resources.getResource("PrivateData.docx")).getInput());
+
+        Map<String, Number> expected = ImmutableMap.<String, Number>builder()
+                .put("CreditCard", 100)
+                .put("SSN", 100)
                 .build();
 
         assertEquals(actual, expected);
