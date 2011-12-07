@@ -1,1 +1,1 @@
-Skeleton server with no resources.
+Sample classifier service.
