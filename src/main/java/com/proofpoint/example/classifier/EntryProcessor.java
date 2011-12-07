@@ -1,4 +1,4 @@
-package com.proofpoint.classifier;
+package com.proofpoint.example.classifier;
 
 import java.io.IOException;
 import java.io.InputStream;

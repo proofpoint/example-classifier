@@ -1,4 +1,4 @@
-package com.proofpoint.classifier;
+package com.proofpoint.example.classifier;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableMap;
