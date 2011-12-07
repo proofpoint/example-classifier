@@ -33,5 +33,6 @@ public class MainModule
         binder.bind(ClassifierResource.class).in(Scopes.SINGLETON);
         binder.bind(UsersOnHoldResource.class).in(Scopes.SINGLETON);
         binder.bind(UsersOnHold.class).in(Scopes.SINGLETON);
+        binder.bind(ClassificationStore.class).to(InMemoryClassificationStore.class).in(Scopes.SINGLETON);
     }
 }
