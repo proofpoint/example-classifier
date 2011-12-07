@@ -76,6 +76,17 @@ public class TestClassifierResource
         assertEquals(actual, expected);
     }
 
+
+    @Test
+    public void testEmptyWordDoc()
+            throws IOException
+    {
+        Map<String, Number> actual = new ClassifierResource().post(Resources.newInputStreamSupplier(Resources.getResource("EmptyDocument.docx")).getInput());
+
+        assertEquals(actual, ImmutableMap.of());
+    }
+
+
     private ByteArrayInputStream toInputStream(String document)
     {
         return new ByteArrayInputStream(document.getBytes(Charsets.UTF_8));
