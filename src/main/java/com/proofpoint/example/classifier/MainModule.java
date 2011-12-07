@@ -31,5 +31,7 @@ public class MainModule
         DiscoveryBinder.discoveryBinder(binder).bindHttpAnnouncement("classifier");
 
         binder.bind(ClassifierResource.class).in(Scopes.SINGLETON);
+        binder.bind(UsersOnHoldResource.class).in(Scopes.SINGLETON);
+        binder.bind(UsersOnHold.class).in(Scopes.SINGLETON);
     }
 }

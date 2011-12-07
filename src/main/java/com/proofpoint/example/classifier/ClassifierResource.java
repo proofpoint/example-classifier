@@ -5,7 +5,9 @@ import com.google.common.base.Charsets;
 import com.google.common.collect.Maps;
 import com.google.common.io.CharStreams;
 
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -26,14 +28,25 @@ public class ClassifierResource
     private final Pattern SSN_PATTERN = Pattern.compile("\\d{3}-\\d{2}-\\d{4}");
     private final StreamFlattener flattener = new StreamFlattener();
 
+    private final UsersOnHold usersOnHold;
+
+    @Inject
+    public ClassifierResource(UsersOnHold usersOnHold)
+    {
+        this.usersOnHold = usersOnHold;
+    }
 
     @POST
     @Consumes(MediaType.APPLICATION_OCTET_STREAM)
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, Number> post(final InputStream input)
+    public Map<String, Number> post(@HeaderParam("X-NP-User-Name") String userId, final InputStream input)
             throws IOException
     {
         final Map<String, Number> result = Maps.newHashMap();
+
+        if (usersOnHold.contains(userId)) {
+            result.put("Hold", 100);
+        }
 
         flattener.flatten(input, new EntryProcessor()
         {
